@@ -188,57 +188,57 @@
 
                                     date_default_timezone_set("America/Tijuana");
 
-                                    $ahora = date("d-m-Y");
+                                    $ahora = date("Y-m-d");
 
                                 ?>
 
                                 <div class="col-lg-12">
                                     <div class="card">
-                                        <div class="card-header"><strong>Ingresa bien</strong><small> lo siguiente</small></div>
+                                        <div class="card-header"><strong>RUTA DE COBRO</strong></div>
                                             <div class="card-body card-block">
-                                                <form method="POST" action="logica/crearprestamo.php">
-                                                    <div class="row">
-                                                        <div class="col-sm-6">
-                                                            <label for="company" class=" form-control-label">Nombre Cliente</label><input type="text" id="cliente_nombre" name="cliente_nombre" placeholder="Nombre Del Cliente" class="form-control" required="Ingresa este campo">
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label for="vat" class=" form-control-label">Fecha De Prestamo</label><input type="text" id="fecha_prestamo" name="fecha_prestamo"placeholder="<?php echo $ahora ?>" class="form-control" required="Ingresa este campo" value="<?php echo $ahora ?>" readonly="readonly">
-                                                        </div>
-                                                    </div>
-                                                    <br>
-                                                    <div class="row">
-                                                        <div class="col-sm-6">
-                                                            <label for="company" class=" form-control-label">Monto</label><input type="number" id="monto" name="monto" placeholder="Ingresa el monto" class="form-control" required="Ingresa este campo">
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label for="vat" class=" form-control-label">Interes</label><input type="text" id="interes" name="interes" placeholder="5" value="5" class="form-control" required="Ingresa este campo" readonly="readonly">
-                                                        </div>
-                                                    </div>
-                                                     <br>
-                                                    <div class="row">
-                                                        <div class="col-sm-6">
-                                                            <label for="company" class=" form-control-label">Plazo</label>  
-                                                            <select name="plazo" id="plazo" class="form-control">
-                                                                
-                                                                <option value="12">12 Semanas</option>
-                                                                <option value="16">16 Semanas</option>
-                                                                
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label for="vat" class=" form-control-label">Responable</label><input type="text" id="responsable" name="responsable" placeholder="<?= $user['nombre_us']; ?>" class="form-control"  value="<?= $user['nombre_us']; ?>" readonly="readonly">
-                                                        </div>
-                                                    </div>
-                                                    <br>
-                                                     <div class="form-actions form-group">
-                                                        <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
-                                                            <i class="fa fa-save"></i>&nbsp;
-                                                            <span id="payment-button-amount">Guardar</span>
-                                                        </button>
-                                                    </div>
-                                                </form>
                                               
+                                              
+                                        	<?php
+												include_once "../base_de_datos.php";
+												$sentencia = $base_de_datos->query("SELECT * FROM prestamos where activo = '1' and fecha_proxima = '".$ahora."' order by id_prestamos desc ;");
+												$productos = $sentencia->fetchAll(PDO::FETCH_OBJ);
+																					?>
 
+
+
+                                 <table class="table table-striped" border="1" >
+                                        <thead>
+                                            <tr>
+                                             <th scope="col">Cliente</th>
+												
+												<th scope="col">Monto</th>
+												<th scope="col">Numero De Pago</th>
+												<th scope="col">Cobrar</th>
+																							
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            
+                                            <?php foreach($productos as $producto){ ?>
+
+                                       
+
+                                            <tr>
+                                                
+                                           
+																								<td><?php echo $producto->cliente_nombre ?></td>
+																								<td><?php echo $producto->pagos ?></td>
+																								<td><?php echo $producto->n_pago ?></td>
+																								
+																								
+										<td><a class="btn btn-info" href="<?php echo "logica/cobrar.php?id_prestamos=" . $producto->id_prestamos?>"><i class="fa  fa-paste"></i></a></td>
+																				
+                                                
+                                            </tr>
+                                            <?php } ?>
+
+                                        </tbody>
+                                    </table>
                                               
                                             </div>
                                     </div>

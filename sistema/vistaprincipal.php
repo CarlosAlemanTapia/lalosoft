@@ -104,9 +104,9 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>PRESTAMOS</a>
                         <ul class="sub-menu children dropdown-menu">                            
                             <li><i class="fa fa-id-badge"></i><a href="prestamos/vistaprestamos.php">CREAR NUEVO</a></li>
-                            <li><i class="fa fa-bars"></i><a href="ui-tabs.html">RUTA DE COBRO</a></li>
-                            <li><i class="fa fa-bars"></i><a href="ui-tabs.html">DEUDAS LISTA</a></li>
-                            <li><i class="fa fa-bars"></i><a href="ui-tabs.html">HISTORIAL</a></li>
+                            <li><i class="fa fa-bars"></i><a href="prestamos/rutacobro.php">RUTA DE COBRO</a></li>
+                            <li><i class="fa fa-bars"></i><a href="prestamos/listaprestamos.php">DEUDAS LISTA</a></li>
+                            <li><i class="fa fa-bars"></i><a href="prestamos/historial.php">HISTORIAL</a></li>
                         </ul>
                     </li>
                 
@@ -116,7 +116,7 @@
                       <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>PRODUCTOS</a>
                         <ul class="sub-menu children dropdown-menu">                            
-                            <li><i class="fa fa-id-badge"></i><a href="ui-badges.html">BODEGA</a></li>
+                            <li><i class="fa fa-id-badge"></i><a href="inventario/vistainventariobodega.php">BODEGA</a></li>
                             <li><i class="fa fa-bars"></i><a href="ui-tabs.html">LOCAL</a></li>
                             <li><i class="fa fa-id-card-o"></i><a href="ui-cards.html">SOBRE RUEDAS</a></li>
                             <li><i class="fa fa-exclamation-triangle"></i><a href="ui-alerts.html">GLOBAL</a></li>

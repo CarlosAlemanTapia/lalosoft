@@ -42,8 +42,8 @@
 
 						echo $user['nombre_us'];
 
-						$sucursal_us = $user['sucursal_us'];
-						$nivel_us = $user['nivel_us'];
+						// $sucursal_us = $user['sucursal_us'];
+						// $nivel_us = $user['nivel_us'];
 
 
 							

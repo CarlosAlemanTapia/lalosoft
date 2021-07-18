@@ -182,70 +182,46 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
-                            
+                            	
+                        	<?php
+								include_once "../base_de_datos.php";
+								$sentencia = $base_de_datos->query("SELECT * FROM prestamos where activo = '1' order by id_prestamos desc ;");
+								$productos = $sentencia->fetchAll(PDO::FETCH_OBJ);
+							?>
+
+						
+                                	<?php foreach($productos as $producto){ ?>
+                                      
                             <div class="row">
-                                <?php
+                            	  <div class="col-lg-12">
+                        <div class="card">
+                            <div class="" style="width:350px; border: solid;">
 
-                                    date_default_timezone_set("America/Tijuana");
+								<header class="" style="background-color: #A2A2A2; border: solid;">
+								  <h3 align="center"><?php echo $producto->cliente_nombre ?></h3>
+								</header>
 
-                                    $ahora = date("d-m-Y");
+								<div class="w3-container">
+									<br>
+								  <p><b>Fecha De Prestamo :</b> <?php echo $producto->fecha_prestamo ?></p>
+								  <p><b>Proximo Pago :</b> <?php echo $producto->fecha_proxima ?></p>
+								  <p><b>Numero De Pago :</b> <?php echo $producto->n_pago ?>/<?php echo $producto->plazo ?></p>
 
-                                ?>
+								  <hr>
+								  <p><b>Total A Pagar:</b> <?php echo $producto->total_pagar ?></p>
+								  <p>Pago Semanal: <?php echo $producto->pagos ?></p>
+								  <p><b>Saldo Actual:</b> <?php echo $producto->saldo ?></p>
+								</div>
 
-                                <div class="col-lg-12">
-                                    <div class="card">
-                                        <div class="card-header"><strong>Ingresa bien</strong><small> lo siguiente</small></div>
-                                            <div class="card-body card-block">
-                                                <form method="POST" action="logica/crearprestamo.php">
-                                                    <div class="row">
-                                                        <div class="col-sm-6">
-                                                            <label for="company" class=" form-control-label">Nombre Cliente</label><input type="text" id="cliente_nombre" name="cliente_nombre" placeholder="Nombre Del Cliente" class="form-control" required="Ingresa este campo">
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label for="vat" class=" form-control-label">Fecha De Prestamo</label><input type="text" id="fecha_prestamo" name="fecha_prestamo"placeholder="<?php echo $ahora ?>" class="form-control" required="Ingresa este campo" value="<?php echo $ahora ?>" readonly="readonly">
-                                                        </div>
-                                                    </div>
-                                                    <br>
-                                                    <div class="row">
-                                                        <div class="col-sm-6">
-                                                            <label for="company" class=" form-control-label">Monto</label><input type="number" id="monto" name="monto" placeholder="Ingresa el monto" class="form-control" required="Ingresa este campo">
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label for="vat" class=" form-control-label">Interes</label><input type="text" id="interes" name="interes" placeholder="5" value="5" class="form-control" required="Ingresa este campo" readonly="readonly">
-                                                        </div>
-                                                    </div>
-                                                     <br>
-                                                    <div class="row">
-                                                        <div class="col-sm-6">
-                                                            <label for="company" class=" form-control-label">Plazo</label>  
-                                                            <select name="plazo" id="plazo" class="form-control">
-                                                                
-                                                                <option value="12">12 Semanas</option>
-                                                                <option value="16">16 Semanas</option>
-                                                                
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label for="vat" class=" form-control-label">Responable</label><input type="text" id="responsable" name="responsable" placeholder="<?= $user['nombre_us']; ?>" class="form-control"  value="<?= $user['nombre_us']; ?>" readonly="readonly">
-                                                        </div>
-                                                    </div>
-                                                    <br>
-                                                     <div class="form-actions form-group">
-                                                        <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
-                                                            <i class="fa fa-save"></i>&nbsp;
-                                                            <span id="payment-button-amount">Guardar</span>
-                                                        </button>
-                                                    </div>
-                                                </form>
-                                              
+								<a class="btn btn-info" href="<?php echo "notapedido.php?id_pedido=" . $producto->id_pedido?>" style="width:90%; margin-left: 10px; margin-bottom: 10px;"><i class="fa  fa-paste"></i></a>
 
-                                              
-                                            </div>
-                                    </div>
-                                </div>
-                              
-                            </div> <!-- /.row -->
-                            <div class="card-body"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+                       		 <?php } ?>
+
                         </div>
                     </div><!-- /# column -->
                 </div>

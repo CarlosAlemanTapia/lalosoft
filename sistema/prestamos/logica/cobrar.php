@@ -1,6 +1,6 @@
 <?php   
 
-  include '../database.php';
+  include '../../database.php';
 
   session_start();
 
@@ -18,6 +18,11 @@
     if (count($results) > 0) {
       $user = $results;
     }
+
+?>
+<?php 
+	
+	$idpedido = $_GET['id_prestamos'];
 
 ?>
 <!doctype html>
@@ -41,8 +46,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
-    <link rel="stylesheet" href="../assets/css/cs-skin-elastic.css">
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
     <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
@@ -148,8 +153,8 @@
         <header id="header" class="header">
             <div class="top-left">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="./"><img src="../images/logo.png" alt="Logo"></a>
-                    <a class="navbar-brand hidden" href="./"><img src="../images/logo2.png" alt="Logo"></a>
+                    <a class="navbar-brand" href="./"><img src="../../images/logo.png" alt="Logo"></a>
+                    <a class="navbar-brand hidden" href="./"><img src="../../images/logo2.png" alt="Logo"></a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
@@ -158,12 +163,12 @@
                     
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="user-avatar rounded-circle" src="../images/admin.jpg" alt="User Avatar">
+                            <img class="user-avatar rounded-circle" src="../../images/admin.jpg" alt="User Avatar">
                         </a>
 
                         <div class="user-menu dropdown-menu">
                            
-                            <a class="nav-link" href="../../php/salir.php"><i class="fa fa-sign-out"></i>Logout</a>
+                            <a class="nav-link" href="../../../php/salir.php"><i class="fa fa-sign-out"></i>Logout</a>
 
                         </div>
                     </div>
@@ -192,43 +197,44 @@
 
                                 ?>
 
+                                <?php
+									
+									include_once "../../base_de_datos.php";
+									$sentencia = $base_de_datos->query("SELECT * FROM prestamos where id_prestamos = $idpedido;");
+									$productos = $sentencia->fetchAll(PDO::FETCH_OBJ);
+								?>
+
                                 <div class="col-lg-12">
                                     <div class="card">
-                                        <div class="card-header"><strong>Ingresa bien</strong><small> lo siguiente</small></div>
+                                        <div class="card-header"><strong>Pago Semanal</strong></div>
                                             <div class="card-body card-block">
-                                                <form method="POST" action="logica/crearprestamo.php">
+                                                <form method="POST" action="./darpago.php">
+                                                	<?php foreach($productos as $producto){ ?>
                                                     <div class="row">
                                                         <div class="col-sm-6">
-                                                            <label for="company" class=" form-control-label">Nombre Cliente</label><input type="text" id="cliente_nombre" name="cliente_nombre" placeholder="Nombre Del Cliente" class="form-control" required="Ingresa este campo">
+                                                            <label for="company" class=" form-control-label">ID PRESTAMO</label><input type="text" id="id_prestamo" name="id_prestamo" placeholder="<?php echo $producto->id_prestamos ?>" value="<?php echo $producto->id_prestamos ?>" class="form-control" required="Ingresa este campo" readonly="readonly">
                                                         </div>
                                                         <div class="col-sm-6">
-                                                            <label for="vat" class=" form-control-label">Fecha De Prestamo</label><input type="text" id="fecha_prestamo" name="fecha_prestamo"placeholder="<?php echo $ahora ?>" class="form-control" required="Ingresa este campo" value="<?php echo $ahora ?>" readonly="readonly">
+                                                            <label for="vat" class=" form-control-label">Cobrador</label><input type="text" id="cobrador" name="cobrador"placeholder="<?= $user['nombre_us']; ?>" class="form-control" required="" value="<?= $user['nombre_us']; ?>" readonly="readonly">
                                                         </div>
                                                     </div>
                                                     <br>
                                                     <div class="row">
                                                         <div class="col-sm-6">
-                                                            <label for="company" class=" form-control-label">Monto</label><input type="number" id="monto" name="monto" placeholder="Ingresa el monto" class="form-control" required="Ingresa este campo">
+                                                            <label for="company" class=" form-control-label">Fecha De Pago</label><input type="text" id="fecha_pago" name="fecha_pago" placeholder="<?php echo $ahora ?>" class="form-control" required="Ingresa este campo" readonly="readonly">
                                                         </div>
                                                         <div class="col-sm-6">
-                                                            <label for="vat" class=" form-control-label">Interes</label><input type="text" id="interes" name="interes" placeholder="5" value="5" class="form-control" required="Ingresa este campo" readonly="readonly">
+                                                            <label for="vat" class=" form-control-label">Pago</label><input type="text" id="pago" name="pago" placeholder="<?php echo $producto->pagos ?>" value="<?php echo $producto->pagos ?>" class="form-control" required="Ingresa este campo" readonly="readonly">
                                                         </div>
                                                     </div>
                                                      <br>
-                                                    <div class="row">
-                                                        <div class="col-sm-6">
-                                                            <label for="company" class=" form-control-label">Plazo</label>  
-                                                            <select name="plazo" id="plazo" class="form-control">
-                                                                
-                                                                <option value="12">12 Semanas</option>
-                                                                <option value="16">16 Semanas</option>
-                                                                
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label for="vat" class=" form-control-label">Responable</label><input type="text" id="responsable" name="responsable" placeholder="<?= $user['nombre_us']; ?>" class="form-control"  value="<?= $user['nombre_us']; ?>" readonly="readonly">
-                                                        </div>
-                                                    </div>
+
+                                                <input type="text" id="saldo" name="saldo" value="<?php echo $producto->saldo ?>">
+                                                 <input type="text" id="n_pago" name="n_pago" value="<?php echo $producto->n_pago ?>">
+                                                  <input type="text" id="fecha_proxima" name="fecha_proxima" value="<?php echo $producto->fecha_proxima ?>">
+                                                   <input type="text" id="fecha_aviso" name="fecha_aviso" value="<?php echo $producto->fecha_aviso ?>">
+
+                                           
                                                     <br>
                                                      <div class="form-actions form-group">
                                                         <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
@@ -236,6 +242,8 @@
                                                             <span id="payment-button-amount">Guardar</span>
                                                         </button>
                                                     </div>
+
+                                                    <?php } ?>
                                                 </form>
                                               
 
@@ -277,7 +285,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-    <script src="../assets/js/main.js"></script>
+    <script src="../../assets/js/main.js"></script>
 
     <!--  Chart js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
@@ -291,11 +299,11 @@
     <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/simpleweather@3.1.0/jquery.simpleWeather.min.js"></script>
-    <script src="../assets/js/init/weather-init.js"></script>
+    <script src="../../assets/js/init/weather-init.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
-    <script src="../assets/js/init/fullcalendar-init.js"></script>
+    <script src="../../assets/js/init/fullcalendar-init.js"></script>
 
     <!--Local Stuff-->
     <script>
@@ -493,6 +501,6 @@
 </html>
 <?php
 } else {
-  header("location: ../../index.php");
+  header("location: ../../../index.php");
   }
  ?>
