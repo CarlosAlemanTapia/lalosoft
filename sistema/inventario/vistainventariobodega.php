@@ -49,6 +49,7 @@
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
+
 </head>
 <body>
     <!-- Left Panel -->
@@ -142,7 +143,110 @@
                         <div class="card">
                             <div class="card-header">
                                 <strong class="card-title">PRODUCTOS EN BODEGA</strong>
+                                <br>
+                                <br>
+
+                                <button type="button" class="btn btn-info" data-toggle="modal" data-target=".bd-example-modal-lg">Agregar Nuevo</button>
+
+                                <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                       <form method="post" action="php/addproductos.php">
+                                                    
+                                                    <p style="margin-left: 5px;">Datos Del Producto</p>
+                                                    <hr>
+                                                    <div class="row">
+                                                        <div class="col-6" style="margin-left:10px;">
+                                                            <div class="form-group">
+                                                                <label>Codigo Barra:</label>
+                                                                <input id="codigo" name="codigo" type="text" class="form-control" required="Ingresa el codigo de barra">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-6" style="margin-left:-20px;">
+                                                            <div class="form-group">
+                                                                <label>Descripcion Del Producto:</label>
+                                                                <input id="descripcion" name="descripcion" type="text" class="form-control" required="Ingresa la descripcion" >
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                   
+
+
+                                                    <div class="row">
+                                                        <div class="col-6" style="margin-left:10px;">
+                                                            <div class="form-group form-group-default">
+                                                                <label>Tipo Producto:</label>
+                                                                <select name="tipo_pro" id="tipo_pro" class="form-control">
+                                                                    <option value="Samsung">Licuadora</option>
+                                                                    <option value="Otro">Labadora</option>
+                                                                    <option value="Lg">Refrigerador</option>
+                                                                    <option value="Motorola">Estufas</option>
+                                                                    <option value="Huawei">Mini Split</option>
+                                                                    <option value="Iphone">Secadoras</option>
+                                                                    <option value="Alcatel">Alcatel</option>
+                                                                    <option value="Sony">Sony</option>
+                                                                    <option value="Lenovo">Lenovo</option>
+                                                                    <option value="Htc">Htc</option>
+                                                                    <option value="Zte">Zte</option>
+                                                                    <option value="Lanix">Lanix</option>
+                                                                    <option value="Nokia">Nokia</option>
+                                                                    <option value="OnePlus">One Plus</option>
+                                                                    <option value="Xiaomi">Xiaomi</option>
+                                                                    <option value="Vivo">Vivo</option>
+                                                                    <option value="Blue">Blue</option>
+                                                                    <option value="Verycool">Verycool</option>
+                                                                    <option value="Google">Google</option>
+                                                                    <option value="Oppo">Oppo</option>
+                                                                    <option value="Blackvery">Blackvery</option>
+                                                                    <option value="Asus">Asus</option>
+                                                                    <option value="M4">M4</option>
+                                                                    <option value="Polaroid">Polaroid</option>
+                                                                    <option value="Zumm">Zumm</option>
+                                                                    <option value="Hisense">Hisense</option>
+                                                                    <option value="HP">HP</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-6" style="margin-left:-20px;">
+                                                             <div class="form-group form-group-default">
+                                                                <label>Precio Venta:</label>
+                                                                <input id="precioVenta" name="precioVenta" type="number" class="form-control" required="Ingresa el precio venta">
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                
+
+                                                    <div class="form-group form-group-default" style="margin-left:10px; margin-right: 10px;">
+                                                        <label>Existencia Inicial:</label>
+                                                        <input id="existencia" name="existencia" type="number" class="form-control" required="Ingresa la cantidad">
+                                                    </div>
+
+                                                
+                                                    <input type="hidden" id="sucursal_pro" name="sucursal_pro" value="Bodega">
+
+                                                     <div class="row">
+                                                        <div class="col-8" style="margin-left:15%;">
+                                                            <div class="form-group">
+                                                               <input class="form-control btn-info" type="submit" value="Guardar">
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                   
+                                                 
+                                                  
+                                                </form>
+                                    </div>
+                                  </div>
+                                </div>
+
                             </div>
+
                             <?php
 								include_once "../base_de_datos.php";
 								$sentencia = $base_de_datos->query("SELECT * FROM productos where sucursal_pro = 'Bodega' ;");
@@ -168,7 +272,8 @@
                                             <td><?php echo $producto->descripcion ?></td>
                                             <td><?php echo $producto->tipo_pro ?></td>
                                             <td><?php echo $producto->existencia ?></td>
-                                            
+                                               <td><center><a class="btn btn-warning" href="<?php echo "php/modbod.php?id_productos=" . $producto->id_productos?>"><i class="fa fa-edit"></i></a></center></td>
+                                            <td><center><a class="btn btn-danger" href="<?php echo "php/delbod.php?id_productos=" . $producto->id_productos?>"><i class="fa fa-trash-o"></i></a></center></td>
                                         </tr>
                                         
                        		 <?php } ?>
@@ -177,6 +282,8 @@
                             </div>
                         </div>
                     </div>
+
+
 
 
                 </div>
