@@ -28,7 +28,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Ela Admin - HTML5 Admin Template</title>
+    <title>BAZAR GEMANA</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -258,8 +258,9 @@
                                         <tr>
                                             <th>Codigo Barra</th>
                                             <th>Descripción</th>
-                                            <th>Existencia</th>
+                                            
                                             <th>Tipo De Producto</th>
+                                            <th>Existencia</th>
                                             <th>Editar</th>
                                             <th>Eliminar</th>
                                             

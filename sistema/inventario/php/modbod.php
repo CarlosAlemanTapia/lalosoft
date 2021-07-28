@@ -1,6 +1,6 @@
 <?php   
 
-  include '../database.php';
+  include '../../database.php';
 
   session_start();
 
@@ -18,6 +18,23 @@
     if (count($results) > 0) {
       $user = $results;
     }
+
+?>
+<?php
+
+if(!isset($_GET["id_productos"])) exit();
+$id = $_GET["id_productos"];
+
+include_once "../../base_de_datos.php";
+$sentencia = $base_de_datos->prepare("SELECT * FROM productos WHERE id_productos = ?;");
+$sentencia->execute([$id]);
+
+$producto = $sentencia->fetch(PDO::FETCH_OBJ);
+if($producto === FALSE){
+
+    echo "¡No existe algún producto con ese ID!";
+    exit();
+}
 
 ?>
 <!doctype html>
@@ -41,9 +58,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
-    <link rel="stylesheet" href="../assets/css/cs-skin-elastic.css">
-    <link rel="stylesheet" href="../assets/css/lib/datatable/dataTables.bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="../../assets/css/lib/datatable/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
@@ -113,8 +130,8 @@
         <header id="header" class="header">
             <div class="top-left">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="./"><img src="../images/logo.png" alt="Logo"></a>
-                    <a class="navbar-brand hidden" href="./"><img src="../images/logo2.png" alt="Logo"></a>
+                    <a class="navbar-brand" href="./"><img src="../../images/logo.png" alt="Logo"></a>
+                    <a class="navbar-brand hidden" href="./"><img src="../../images/logo2.png" alt="Logo"></a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
@@ -122,11 +139,11 @@
                 <div class="header-menu">
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="user-avatar rounded-circle" src="../images/admin.jpg" alt="User Avatar">
+                            <img class="user-avatar rounded-circle" src="../../images/admin.jpg" alt="User Avatar">
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="../../php/salir.php"><i class="fa fa-sign-out"></i>Logout</a>
+                            <a class="nav-link" href="../../../php/salir.php"><i class="fa fa-sign-out"></i>Logout</a>
 
                         </div>
                     </div>
@@ -142,31 +159,24 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title">PRODUCTOS EN BODEGA</strong>
-                                <br>
-                                <br>
-
-                                <button type="button" class="btn btn-info" data-toggle="modal" data-target=".bd-example-modal-lg">Agregar Nuevo</button>
-
-                                <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                  <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                       <form method="post" action="php/addproductos.php">
+                                <strong class="card-title">EDITAR PRODUCTO = <?php echo $producto->descripcion; ?></strong>
+                            </div>
+                                   <form method="post" action="./guardarDatosEditados.php">
                                                     
-                                                    <p style="margin-left: 5px;">Datos Del Producto</p>
-                                                    <hr>
+                                                  <br>
+                                                  <input type="hidden" name="id_productos" value="<?php echo $producto->id_productos; ?>">
                                                     <div class="row">
                                                         <div class="col-6" style="margin-left:10px;">
                                                             <div class="form-group">
                                                                 <label>Codigo Barra:</label>
-                                                                <input id="codigo" name="codigo" type="text" class="form-control" required="Ingresa el codigo de barra">
+                                                                <input id="codigo" name="codigo" type="text" class="form-control" value="<?php echo $producto->codigo ?>">
                                                             </div>
                                                         </div>
 
                                                         <div class="col-6" style="margin-left:-20px;">
                                                             <div class="form-group">
                                                                 <label>Descripcion Del Producto:</label>
-                                                                <input id="descripcion" name="descripcion" type="text" class="form-control" required="Ingresa la descripcion" >
+                                                                <input id="descripcion" name="descripcion" type="text" class="form-control" value="<?php echo $producto->descripcion ?>" >
                                                             </div>
                                                         </div>
 
@@ -179,6 +189,7 @@
                                                             <div class="form-group form-group-default">
                                                                 <label>Tipo Producto:</label>
                                                                 <select name="tipo_pro" id="tipo_pro" class="form-control">
+                                                                    <option value="<?php echo $producto->tipo_pro ?>"><?php echo $producto->tipo_pro ?></option>
                                                                     <option value="Samsung">Licuadora</option>
                                                                     <option value="Otro">Labadora</option>
                                                                     <option value="Lg">Refrigerador</option>
@@ -213,7 +224,7 @@
                                                         <div class="col-6" style="margin-left:-20px;">
                                                              <div class="form-group form-group-default">
                                                                 <label>Precio Venta:</label>
-                                                                <input id="precioVenta" name="precioVenta" type="number" class="form-control" required="Ingresa el precio venta">
+                                                                <input id="precioVenta" name="precioVenta" type="number" class="form-control" value="<?php echo $producto->precioVenta ?>">
                                                             </div>
                                                         </div>
 
@@ -222,11 +233,9 @@
 
                                                     <div class="form-group form-group-default" style="margin-left:10px; margin-right: 10px;">
                                                         <label>Existencia Inicial:</label>
-                                                        <input id="existencia" name="existencia" type="number" class="form-control" required="Ingresa la cantidad">
+                                                        <input id="existencia" name="existencia" type="number" class="form-control" value="<?php echo $producto->existencia ?>">
                                                     </div>
 
-                                                
-                                                    <input type="hidden" id="sucursal_pro" name="sucursal_pro" value="Bodega">
 
                                                      <div class="row">
                                                         <div class="col-8" style="margin-left:15%;">
@@ -241,45 +250,7 @@
                                                  
                                                   
                                                 </form>
-                                    </div>
-                                  </div>
-                                </div>
-
-                            </div>
-
-                            <?php
-                                include_once "../base_de_datos.php";
-                                $sentencia = $base_de_datos->query("SELECT * FROM productos where sucursal_pro = 'Bodega' ;");
-                                $productos = $sentencia->fetchAll(PDO::FETCH_OBJ);
-                            ?>
-                            <div class="card-body">
-                                <table id="bootstrap-data-table" class="table table-striped table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Codigo Barra</th>
-                                            <th>Descripción</th>
-                                            
-                                            <th>Tipo De Producto</th>
-                                            <th>Existencia</th>
-                                            <th>Editar</th>
-                                            <th>Eliminar</th>
-                                            
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach($productos as $producto){ ?>
-                                        <tr>
-                                            <td><?php echo $producto->codigo ?></td>
-                                            <td><?php echo $producto->descripcion ?></td>
-                                            <td><?php echo $producto->tipo_pro ?></td>
-                                            <td><?php echo $producto->existencia ?></td>
-                                               <td><center><a class="btn btn-warning" href="<?php echo "php/modbod.php?id_productos=" . $producto->id_productos?>"><i class="fa fa-edit"></i></a></center></td>
-                                            <td><center><a class="btn btn-danger" href="<?php echo "php/delbod.php?id_productos=" . $producto->id_productos?>"><i class="fa fa-trash-o"></i></a></center></td>
-                                        </tr>
-                                        
-                             <?php } ?>
-                                    </tbody>
-                                </table>
+                       
                             </div>
                         </div>
                     </div>
@@ -316,19 +287,19 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-    <script src="../assets/js/main.js"></script>
+    <script src="../../assets/js/main.js"></script>
 
 
-    <script src="../assets/js/lib/data-table/datatables.min.js"></script>
-    <script src="../assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
-    <script src="../assets/js/lib/data-table/dataTables.buttons.min.js"></script>
-    <script src="../assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
-    <script src="../assets/js/lib/data-table/jszip.min.js"></script>
-    <script src="../assets/js/lib/data-table/vfs_fonts.js"></script>
-    <script src="../assets/js/lib/data-table/buttons.html5.min.js"></script>
-    <script src="../assets/js/lib/data-table/buttons.print.min.js"></script>
-    <script src="../assets/js/lib/data-table/buttons.colVis.min.js"></script>
-    <script src="../assets/js/init/datatables-init.js"></script>
+    <script src="../../assets/js/lib/data-table/datatables.min.js"></script>
+    <script src="../../assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+    <script src="../../assets/js/lib/data-table/dataTables.buttons.min.js"></script>
+    <script src="../../assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
+    <script src="../../assets/js/lib/data-table/jszip.min.js"></script>
+    <script src="../../assets/js/lib/data-table/vfs_fonts.js"></script>
+    <script src="../../assets/js/lib/data-table/buttons.html5.min.js"></script>
+    <script src="../../assets/js/lib/data-table/buttons.print.min.js"></script>
+    <script src="../../assets/js/lib/data-table/buttons.colVis.min.js"></script>
+    <script src="../../assets/js/init/datatables-init.js"></script>
 
 
     <script type="text/javascript">
@@ -342,6 +313,6 @@
 </html>
 <?php
 } else {
-  header("location: ../../index.php");
+  header("location: ../../../index.php");
   }
  ?>
