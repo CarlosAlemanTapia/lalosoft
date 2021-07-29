@@ -76,17 +76,17 @@ if($producto === FALSE){
 
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                      <li class="active">
-                        <a href="index.html"><i class="menu-icon fa fa-laptop"></i>INICIO </a>
+                     <li class="active">
+                        <a href="../../vistaprincipal.php"><i class="menu-icon fa fa-laptop"></i>INICIO </a>
                     </li>
                     <li class="menu-title">PRESTAMOS</li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>PRESTAMOS</a>
                         <ul class="sub-menu children dropdown-menu">                            
-                            <li><i class="fa fa-id-badge"></i><a href="ui-badges.html">CREAR NUEVO</a></li>
-                            <li><i class="fa fa-bars"></i><a href="ui-tabs.html">RUTA DE COBRO</a></li>
-                            <li><i class="fa fa-bars"></i><a href="ui-tabs.html">DEUDAS LISTA</a></li>
-                            <li><i class="fa fa-bars"></i><a href="ui-tabs.html">HISTORIAL</a></li>
+                            <li><i class="fa fa-id-badge"></i><a href="../../prestamos/vistaprestamos.php">CREAR NUEVO</a></li>
+                            <li><i class="fa fa-bars"></i><a href="../../prestamos/rutacobro.php">RUTA DE COBRO</a></li>
+                            <li><i class="fa fa-bars"></i><a href="../../prestamos/listaprestamos.php">DEUDAS LISTA</a></li>
+                            <li><i class="fa fa-bars"></i><a href="../../prestamos/historial.php">HISTORIAL</a></li>
                         </ul>
                     </li>
                 
@@ -96,9 +96,7 @@ if($producto === FALSE){
                       <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>PRODUCTOS</a>
                         <ul class="sub-menu children dropdown-menu">                            
-                            <li><i class="fa fa-id-badge"></i><a href="ui-badges.html">BODEGA</a></li>
-                            <li><i class="fa fa-bars"></i><a href="ui-tabs.html">LOCAL</a></li>
-                            <li><i class="fa fa-id-card-o"></i><a href="ui-cards.html">SOBRE RUEDAS</a></li>
+                            <li><i class="fa fa-id-badge"></i><a href="../vistainventariobodega.php">BODEGA</a></li>
                             <li><i class="fa fa-exclamation-triangle"></i><a href="ui-alerts.html">GLOBAL</a></li>
                      
                         </ul>
@@ -110,9 +108,10 @@ if($producto === FALSE){
                       <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>NUEVA VENTA</a>
                         <ul class="sub-menu children dropdown-menu">                            
-                            <li><i class="fa fa-id-badge"></i><a href="ui-badges.html">CONTADO</a></li>
-                            <li><i class="fa fa-bars"></i><a href="ui-tabs.html">CREDITO</a></li>
-                            <li><i class="fa fa-id-card-o"></i><a href="ui-cards.html">APARTADO</a></li>
+                            <li><i class="fa fa-id-badge"></i><a href="../../ventas/vistaventasbodega.php"> CONTADO</a></li>
+                            <li><i class="fa fa-bars"></i><a href="ui-tabs.html"> CREDITO</a></li>
+                            <li><i class="fa fa-id-card-o"></i><a href="ui-cards.html"> APARTADO</a></li>
+                            <li><i class="fa fa-bars"></i><a href="../../ventas/hostorial.php"> HISTORIAL</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -130,8 +129,8 @@ if($producto === FALSE){
         <header id="header" class="header">
             <div class="top-left">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="./"><img src="../../images/logo.png" alt="Logo"></a>
-                    <a class="navbar-brand hidden" href="./"><img src="../../images/logo2.png" alt="Logo"></a>
+                    <a class="navbar-brand" href="../../vistaprincipal.php"><img src="../../images/logo.png" alt="Logo"></a>
+                    <a class="navbar-brand hidden" href="../../vistaprincipal.php"><img src="../../images/logo2.png" alt="Logo"></a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
