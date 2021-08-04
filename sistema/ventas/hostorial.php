@@ -147,7 +147,7 @@
 
                             <?php
                                 include_once "../base_de_datos.php";
-                                $sentencia = $base_de_datos->query("SELECT ventas.total, ventas.fecha, ventas.id_venta, GROUP_CONCAT( productos.codigo, '..', productos.descripcion, '..', productos_vendidos.cantidad SEPARATOR '__') AS productos, id_productos_vendidos FROM ventas INNER JOIN productos_vendidos ON productos_vendidos.id_venta = ventas.id_venta INNER JOIN productos ON productos.id_productos = productos_vendidos.id_productos where ventas.sucursal_venta = 'Bodega' GROUP BY ventas.id_venta ORDER BY ventas.id_venta desc;");
+                                $sentencia = $base_de_datos->query("SELECT ventas.total, ventas.fecha, ventas.id_venta,ventas.nombre_us, ventas.modo, GROUP_CONCAT( productos.codigo, '..', productos.descripcion, '..', productos_vendidos.cantidad SEPARATOR '__') AS productos, id_productos_vendidos FROM ventas INNER JOIN productos_vendidos ON productos_vendidos.id_venta = ventas.id_venta INNER JOIN productos ON productos.id_productos = productos_vendidos.id_productos where ventas.sucursal_venta = 'Bodega' GROUP BY ventas.id_venta ORDER BY ventas.id_venta desc;");
                                 $ventas = $sentencia->fetchAll(PDO::FETCH_OBJ);
                             ?>
                             <div class="card-body">
@@ -155,17 +155,21 @@
             <thead>
                 <tr>
                     <th>Número de venta</th>
+                    <th>Cliente</th>
                     <th>Fecha De Venta</th>
                     <th>Productos vendidos</th>
+                    <th>Modo</th>
                     <th>Total $</th>
                     <th>Eliminar</th>
                     <th>Ticket</th>
+                    <th>Nota</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach($ventas as $venta){ ?>
                 <tr>
                     <td><?php echo $venta->id_venta ?></td>
+                    <td><?php echo $venta->nombre_us ?></td>
                     <td><?php echo $venta->fecha ?></td>
                     <td>
                         <table class="table table-bordered">
@@ -189,11 +193,14 @@
                             </tbody>
                         </table>
                     </td>
+                    <td><?php echo $venta->modo ?></td>
                     <td><?php echo $venta->total ?> $</td>
                     
                     <td><a class="btn btn-warning" href="<?php echo "eliminarVenta.php?id_venta=" . $venta->id_venta?>"><i class="fa fa-trash-o"></i></a></td>
 
                     <td><a class="btn btn-info" href="<?php echo "ticketventa.php?id_productos_vendidos=" . $venta->id_productos_vendidos?>"><i class="fa fa-ticket"></i></a></td>
+
+                    <td><a class="btn btn-success" href="<?php echo "nota.php?id_productos_vendidos=" . $venta->id_productos_vendidos?>"><i class="fa fa-ticket"></i></a></td>
 
                 </tr>
                 <?php } ?>

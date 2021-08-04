@@ -1,6 +1,6 @@
 <?php   
 
-  include 'database.php';
+  include '../database.php';
 
   session_start();
 
@@ -41,9 +41,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
-    <link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
-    <link rel="stylesheet" href="assets/css/lib/datatable/dataTables.bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="../assets/css/lib/datatable/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
@@ -59,17 +59,17 @@
 
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                      <li class="active">
-                        <a href="./vistaprincipal.php"><i class="menu-icon fa fa-laptop"></i>INICIO </a>
+                    <li class="active">
+                        <a href="../vistaprincipal.php"><i class="menu-icon fa fa-laptop"></i>INICIO </a>
                     </li>
                     <li class="menu-title">PRESTAMOS</li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>PRESTAMOS</a>
                         <ul class="sub-menu children dropdown-menu">                            
-                            <li><i class="fa fa-id-badge"></i><a href="prestamos/vistaprestamos.php">CREAR NUEVO</a></li>
-                            <li><i class="fa fa-bars"></i><a href="prestamos/rutacobro.php">RUTA DE COBRO</a></li>
-                            <li><i class="fa fa-bars"></i><a href="prestamos/listaprestamos.php">DEUDAS LISTA</a></li>
-                            <li><i class="fa fa-bars"></i><a href="prestamos/historial.php">HISTORIAL</a></li>
+                            <li><i class="fa fa-id-badge"></i><a href="../prestamos/vistaprestamos.php">CREAR NUEVO</a></li>
+                            <li><i class="fa fa-bars"></i><a href="../prestamos/rutacobro.php">RUTA DE COBRO</a></li>
+                            <li><i class="fa fa-bars"></i><a href="../prestamos/listaprestamos.php">DEUDAS LISTA</a></li>
+                            <li><i class="fa fa-bars"></i><a href="../prestamos/historial.php">HISTORIAL</a></li>
                         </ul>
                     </li>
                 
@@ -79,8 +79,8 @@
                       <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>PRODUCTOS</a>
                         <ul class="sub-menu children dropdown-menu">                            
-                            <li><i class="fa fa-id-badge"></i><a href="inventario/vistainventariobodega.php">BODEGA</a></li>
-                            <li><i class="fa fa-exclamation-triangle"></i><a href="inventario/vistaglobal.php">GLOBAL</a></li>
+                            <li><i class="fa fa-id-badge"></i><a href="./vistainventariobodega.php">BODEGA</a></li>
+                            <li><i class="fa fa-exclamation-triangle"></i><a href="ui-alerts.html">GLOBAL</a></li>
                      
                         </ul>
                     </li>
@@ -91,12 +91,10 @@
                       <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>NUEVA VENTA</a>
                         <ul class="sub-menu children dropdown-menu">                            
-                            <li><i class="fa fa-id-badge"></i><a href="ventas/vistaventasbodega.php"> CONTADO</a></li>
-                            <li><i class="fa fa-bars"></i><a href="ventas/vistabodegacredito.php"> CREDITO</a></li>
-                            <li><i class="fa fa-id-card-o"></i><a href="ventas/vistaventasbodega.php"> APARTADO</a></li>
-                            <li><i class="fa fa-bars"></i><a href="ventas/hostorial.php"> HISTORIAL CONTADO</a></li>
-                            <li><i class="fa fa-bars"></i><a href="ventas/historialc.php"> HISTORIAL CREDITO</a></li>
-                            <li><i class="fa fa-bars"></i><a href="ventas/hostorial.php"> HISTORIAL APARTADOS</a></li>
+                            <li><i class="fa fa-id-badge"></i><a href="../ventas/vistaventasbodega.php"> CONTADO</a></li>
+                            <li><i class="fa fa-bars"></i><a href="ui-tabs.html"> CREDITO</a></li>
+                            <li><i class="fa fa-id-card-o"></i><a href="ui-cards.html"> APARTADO</a></li>
+                            <li><i class="fa fa-bars"></i><a href="../ventas/hostorial.php"> HISTORIAL</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -114,8 +112,8 @@
         <header id="header" class="header">
             <div class="top-left">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="./vistaprincipal.php"><img src="images/logo.png" alt="Logo"></a>
-                    <a class="navbar-brand hidden" href="./vistaprincipal.php"><img src="images/logo2.png" alt="Logo"></a>
+                    <a class="navbar-brand" href="../vistaprincipal.php"><img src="../images/logo.png" alt="Logo"></a>
+                    <a class="navbar-brand hidden" href="../vistaprincipal.php"><img src="../images/logo2.png" alt="Logo"></a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
@@ -123,11 +121,11 @@
                 <div class="header-menu">
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
+                            <img class="user-avatar rounded-circle" src="../images/admin.jpg" alt="User Avatar">
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="../php/salir.php"><i class="fa fa-sign-out"></i>Logout</a>
+                            <a class="nav-link" href="../../php/salir.php"><i class="fa fa-sign-out"></i>Logout</a>
 
                         </div>
                     </div>
@@ -143,11 +141,45 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title">INICIO</strong>                          
+                                <strong class="card-title">PRODUCTOS GLOBAL</strong>
+                       
 
                             </div>
 
-                            
+                            <?php
+								include_once "../base_de_datos.php";
+								$sentencia = $base_de_datos->query("SELECT * FROM productos where sucursal_pro = 'Bodega' ;");
+								$productos = $sentencia->fetchAll(PDO::FETCH_OBJ);
+							?>
+                            <div class="card-body">
+                                <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Codigo Barra</th>
+                                            <th>Descripción</th>
+                                            
+                                            <th>Tipo De Producto</th>
+                                            <th>Existencia</th>
+                                            <th>Sucursal</th>
+                                           
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    	<?php foreach($productos as $producto){ ?>
+                                        <tr>
+                                            <td><?php echo $producto->codigo ?></td>
+                                            <td><?php echo $producto->descripcion ?></td>
+                                            <td><?php echo $producto->tipo_pro ?></td>
+                                            <td><?php echo $producto->existencia ?></td>
+                                            <th><?php echo $producto->sucursal_pro ?></th>
+                                           
+                                        </tr>
+                                        
+                       		 <?php } ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
 
@@ -183,19 +215,19 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="../assets/js/main.js"></script>
 
 
-    <script src="assets/js/lib/data-table/datatables.min.js"></script>
-    <script src="assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
-    <script src="assets/js/lib/data-table/dataTables.buttons.min.js"></script>
-    <script src="assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
-    <script src="assets/js/lib/data-table/jszip.min.js"></script>
-    <script src="assets/js/lib/data-table/vfs_fonts.js"></script>
-    <script src="assets/js/lib/data-table/buttons.html5.min.js"></script>
-    <script src="assets/js/lib/data-table/buttons.print.min.js"></script>
-    <script src="assets/js/lib/data-table/buttons.colVis.min.js"></script>
-    <script src="assets/js/init/datatables-init.js"></script>
+    <script src="../assets/js/lib/data-table/datatables.min.js"></script>
+    <script src="../assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+    <script src="../assets/js/lib/data-table/dataTables.buttons.min.js"></script>
+    <script src="../assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
+    <script src="../assets/js/lib/data-table/jszip.min.js"></script>
+    <script src="../assets/js/lib/data-table/vfs_fonts.js"></script>
+    <script src="../assets/js/lib/data-table/buttons.html5.min.js"></script>
+    <script src="../assets/js/lib/data-table/buttons.print.min.js"></script>
+    <script src="../assets/js/lib/data-table/buttons.colVis.min.js"></script>
+    <script src="../assets/js/init/datatables-init.js"></script>
 
 
     <script type="text/javascript">
@@ -209,6 +241,6 @@
 </html>
 <?php
 } else {
-  header("location: ../index.php");
+  header("location: ../../index.php");
   }
  ?>

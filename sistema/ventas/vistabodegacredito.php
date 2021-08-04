@@ -204,7 +204,7 @@
         ?>
         <br>
 
-        <form method="post" action="agregarAlCarrito.php">
+        <form method="post" action="agregarAlCarritoc.php">
             <label for="codigo">Código de barras:</label>
             <input autocomplete="off" autofocus class="form-control" name="codigo" required type="text" id="codigo" placeholder="Escribe el código" required="">
         </form>
@@ -217,7 +217,7 @@
                             <div class="col-md-6">
                             <div class="card full-height">
                                 <div class="card-body">
-                                    <div class=""><b>PRODUCTOS</b></div>
+                                    <div class=""><b>PRODUCTOS CREDITO</b></div>
                                     <br>
                                     <table class="table table-bordered">
             <thead>
@@ -240,7 +240,7 @@
                     <td><?php echo $producto->precioVenta ?></td>
                     <td><?php echo $producto->cantidad ?></td>
                     <td><?php echo $producto->total ?></td>
-                    <td><a class="btn btn-danger" href="<?php echo "quitarDelCarrito.php?indice=" . $indice?>"><i class="fa fa-trash"></i></a></td>
+                    <td><a class="btn btn-danger" href="<?php echo "quitarDelCarritoc.php?indice=" . $indice?>"><i class="fa fa-trash"></i></a></td>
                 </tr>
                 <?php } ?>
             </tbody>
@@ -249,15 +249,16 @@
     
   
         <h3>Total Real: <?php echo $granTotal; ?></h3>
-        <form action="./terminarVenta.php" method="POST">
+        <form action="./terminarVentac.php" method="POST">
             
             <input name="total" type="hidden" value="<?php echo $granTotal;?>">
             <p>Nombre Cliente: <input name="nombre_us" id="nombre_us" type="text" ></p>
             <p>Telefono Cliente: <input name="telefono_us" id="telefono_us" type="text" ></p>
-            <input name="modo" id="modo" type="hidden" value="Contado">
+            <p>Abono: <input name="abonos" id="abonos" type="number" ></p>
+            <input name="modo" id="modo" type="hidden" value="Credito">
             <button type="submit" class="btn btn-success">Terminar venta</button>
-            <a href="./cancelarVenta.php" class="btn btn-danger">Cancelar venta</a>
-            <a href="./ticketventa_directa.php" class="btn btn-warning">Imprimir ultimo ticket</a>
+            <a href="./cancelarVentac.php" class="btn btn-danger">Cancelar venta</a>
+            <a href="./ticketventa_directac.php" class="btn btn-warning">Imprimir ultimo ticket</a>
 
         </form>
                                 </div>
@@ -276,6 +277,77 @@
                          
                             </div>
                         </div>
+
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+
+                            </div>
+
+                                <?php
+                                include_once "../base_de_datos.php";
+                                $sentencia = $base_de_datos->query("SELECT ventas.total, ventas.fecha, ventas.id_venta,ventas.nombre_us, ventas.modo, productos_vendidos.abonos, GROUP_CONCAT( productos.codigo, '..', productos.descripcion, '..', productos_vendidos.cantidad SEPARATOR '__') AS productos, id_productos_vendidos FROM ventas INNER JOIN productos_vendidos ON productos_vendidos.id_venta = ventas.id_venta INNER JOIN productos ON productos.id_productos = productos_vendidos.id_productos where ventas.sucursal_venta = 'Bodega' and ventas.modo = 'Credito' and productos_vendidos.activo = '1'  GROUP BY ventas.id_venta ORDER BY ventas.id_venta desc;");
+                                $ventas = $sentencia->fetchAll(PDO::FETCH_OBJ);
+                            ?>
+                            <div class="card-body">
+                                <table class="table table-striped table-bordered" >
+            <thead>
+                <tr>
+                    <th>Número de venta</th>
+                    <th>Cliente</th>
+                    <th>Fecha De Venta</th>
+                    <th>Productos vendidos</th>
+                    <th>Abonos</th>
+                    <th>Total $</th>
+                    <th>Pagado Completo</th>
+                    <th>Abonar</th>
+                    <th>Nota</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($ventas as $venta){ ?>
+                <tr>
+                    <td><?php echo $venta->id_venta ?></td>
+                    <td><?php echo $venta->nombre_us ?></td>
+                    <td><?php echo $venta->fecha ?></td>
+                    <td>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Descripción</th>
+                                    <th>Cantidad</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach(explode("__", $venta->productos) as $productosConcatenados){ 
+                                $producto = explode("..", $productosConcatenados)
+                                ?>
+                                <tr>
+                                    <td><?php echo $producto[0] ?></td>
+                                    <td><?php echo $producto[1] ?></td>
+                                    <td><?php echo $producto[2] ?></td>
+                                </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td><?php echo $venta->abonos ?></td>
+                    <td><?php echo $venta->total ?> $</td>
+                    
+                    <td><a class="btn btn-warning" href="<?php echo "eliminarVenta.php?id_venta=" . $venta->id_venta?>"><i class="fa fa-trash-o"></i></a></td>
+
+                    <td><a class="btn btn-info" href="<?php echo "ticketventa.php?id_productos_vendidos=" . $venta->id_productos_vendidos?>"><i class="fa fa-ticket"></i></a></td>
+
+                    <td><a class="btn btn-success" href="<?php echo "nota.php?id_productos_vendidos=" . $venta->id_productos_vendidos?>"><i class="fa fa-ticket"></i></a></td>
+
+                </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+                            </div>
+                        </div>
+                    </div>
                     
 
 
