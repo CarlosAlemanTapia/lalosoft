@@ -31,7 +31,7 @@ and is wrapped around the whole page content, except for the footer in this exam
   <!-- Header -->
   <header class="w3-container w3-center w3-padding-48 w3-white">
     <h1 class="w3-xxxlarge"><b>BAZAR GEMANA</b></h1>
-    <h6>Welcome, mira, revisa <span class="w3-tag">Compra</span></h6>
+    <h6>Bienvenido, mira, revisa <span class="w3-tag">Compra</span></h6>
   </header>
 
   <!-- Image header -->
@@ -119,7 +119,8 @@ and is wrapped around the whole page content, except for the footer in this exam
         </div>
         <div class="w3-container w3-white">
           <div class="w3-container w3-display-container w3-light-grey w3-section" style="height:200px">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d107726.9308778265!2d-116.9378751685511!3d32.460209663213064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xe5d0eb4af6bac8ec!2sWaldo&#39;s!5e0!3m2!1ses!2smx!4v1627500079274!5m2!1ses!2smx" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3365.573936668752!2d-116.87476468482537!3d32.484085981061384!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80d93fd1ad22675f%3A0xe031db0661da979a!2sBazar%20Gemana!5e0!3m2!1ses-419!2smx!4v1628111783695!5m2!1ses-419!2smx" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
           </div>
         </div>
       </div>
